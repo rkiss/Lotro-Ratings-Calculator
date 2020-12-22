@@ -894,3 +894,56 @@ function ShowNotes() {
 function CloseNotes() {
 	document.getElementById('notes').hidden = true;
 }
+
+function ImportExport() {
+	document.getElementById('import-dialog').hidden = false;
+	// need to fill the textarea with data
+	data = { class: PlayerClass, level: PlayerLvl };
+	data["crithit"] = document.getElementById("crithit" + "currrat").value;
+	data["finesse"] = document.getElementById("finesse" + "currrat").value;
+	data["phydmg"] = document.getElementById("phydmg" + "currrat").value;
+	data["tacdmg"] = document.getElementById("tacdmg" + "currrat").value;
+	data["resist"] = document.getElementById("resist" + "currrat").value;
+	data["critdef"] = document.getElementById("critdef" + "currrat").value;
+	data["inheal"] = document.getElementById("inheal" + "currrat").value;
+	data["block"] = document.getElementById("block" + "currrat").value;
+	data["parry"] = document.getElementById("parry" + "currrat").value;
+	data["evade"] = document.getElementById("evade" + "currrat").value;
+	data["phymit"] = document.getElementById("phymit" + "currrat").value;
+	data["tacmit"] = document.getElementById("tacmit" + "currrat").value;
+	dataStr = JSON.stringify(data).replaceAll(",", ",\n").replaceAll("{", "{\n").replaceAll("}", "\n}");
+	document.getElementById('import-values').value= dataStr;
+}
+
+function CloseImport() {
+	document.getElementById('import-dialog').hidden = true;
+}
+
+function ApplyRatting(data, attribute) {
+	value = data[attribute].replaceAll(",", "");
+	if( value == "N/A" ) {
+		value = "0"
+	}
+	elem = document.getElementById(attribute + "currrat");
+	elem.value=value;
+	ProcessCurrRat(elem);
+}
+
+function ApplyData() {
+	data = JSON.parse(document.getElementById('import-values').value);
+	CloseImport();
+	SelectClass(data.class.toLowerCase());
+	SelectLevel(data.level);
+	ApplyRatting(data, "crithit");
+	ApplyRatting(data, "finesse");
+	ApplyRatting(data, "phydmg");
+	ApplyRatting(data, "tacdmg");
+	ApplyRatting(data, "resist");
+	ApplyRatting(data, "critdef");
+	ApplyRatting(data, "inheal");
+	ApplyRatting(data, "block");
+	ApplyRatting(data, "parry");
+	ApplyRatting(data, "evade");
+	ApplyRatting(data, "phymit");
+	ApplyRatting(data, "tacmit");
+}

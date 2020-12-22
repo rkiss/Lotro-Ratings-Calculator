@@ -12,6 +12,27 @@
 	</div>
 </header>
 <main>
+	<div id="import-dialog" hidden>
+		<div class="popupframe">
+			<div class="pu-topl"></div>
+			<div class="pu-topm"></div>
+			<div class="pu-topr"><div class="closebtn" onclick="CloseImport()"></div></div>
+			<div class="pu-midl"></div>
+			<div class="pu-midm">
+				<div id="import-dalog-text">
+					<h1>Current class, level and ratings:</h1>
+					<textarea id="import-values" rows="20" cols="70"></textarea>
+					<div>
+						<button type="button" onclick="ApplyData()">Import</button>
+					</div>
+				</div>
+			</div>
+			<div class="pu-midr"></div>
+			<div class="pu-botl"></div>
+			<div class="pu-botm"></div>
+			<div class="pu-botr"></div>
+		</div>
+	</div>
 	<div id="notes" hidden>
 		<div class="popupframe">
 			<div class="pu-topl"></div>
@@ -71,6 +92,11 @@ Calculations work like:<br />
 		<div class="top-div"></div>
 		<div class="nav-bar">
 			<ul class="actions">
+				<li class="selection">
+					<span id="selitem-export" onclick="ImportExport()" title="Import or Export values">
+						<img id="class-deco" src="./images/penslotactive.png">
+					</span>
+				</li>
 				<li class="selection">
 					<span id="selitem-class" onclick="MakeSelection('class')" title="Select your class.">
 						<img id="class-symb" src="./images/classes/beorning.png">
